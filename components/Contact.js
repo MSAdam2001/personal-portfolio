@@ -3,7 +3,7 @@
 export default function Contact() {
   return (
     <section id="contact" style={{
-      padding: '6rem 2rem',
+      padding: 'clamp(3rem, 8vw, 6rem) clamp(1rem, 5vw, 2rem)',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -11,7 +11,7 @@ export default function Contact() {
     }}>
 
       <h2 style={{
-        fontSize: 'clamp(2.2rem, 6vw, 3.6rem)',
+        fontSize: 'clamp(2rem, 6vw, 3.6rem)',
         fontWeight: 800,
         color: '#ffffff',
         letterSpacing: '-0.03em',
@@ -22,7 +22,7 @@ export default function Contact() {
       </h2>
 
       <p style={{
-        fontSize: 15,
+        fontSize: 'clamp(13px, 2.5vw, 15px)',
         color: '#888888',
         lineHeight: 1.8,
         maxWidth: 520,
@@ -39,12 +39,14 @@ export default function Contact() {
         flexWrap: 'wrap',
         justifyContent: 'center',
         marginBottom: '2.5rem',
+        width: '100%',
+        maxWidth: 560,
       }}>
 
         <a href="mailto:mujaheedsaid8003@gmail.com"
           className="cbtn cbtn-primary">
           <EmailIcon />
-          mujaheedsaid8003@gmail.com
+          <span className="cbtn-email-text">mujaheedsaid8003@gmail.com</span>
           <em className="cbtn-arrow">→</em>
         </a>
 
@@ -64,10 +66,10 @@ export default function Contact() {
       </div>
 
       {/* Footer line */}
-      <p style={{ fontSize: 12, color: '#444444', letterSpacing: '0.03em' }}>
-        Response time: Within 24 hours
-        <span style={{ margin: '0 8px', color: '#2a2a2a' }}>•</span>
-        Located: Kano State, Nigeria
+      <p className="contact-footer">
+        <span>Response time: Within 24 hours</span>
+        <span className="contact-dot">•</span>
+        <span>Located: Kano State, Nigeria</span>
       </p>
 
       <style>{`
@@ -77,7 +79,7 @@ export default function Contact() {
           gap: 10px;
           padding: 15px 26px;
           border-radius: 10px;
-          font-size: 14px;
+          font-size: clamp(12px, 2.5vw, 14px);
           font-weight: 700;
           text-decoration: none;
           font-family: 'Inter', sans-serif;
@@ -92,8 +94,52 @@ export default function Contact() {
         .cbtn-arrow { font-style: normal; transition: transform 0.18s ease; }
         .cbtn:hover .cbtn-arrow { transform: translateX(4px); }
 
+        .contact-footer {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+          gap: 4px 8px;
+          font-size: clamp(11px, 2vw, 12px);
+          color: #444444;
+          letter-spacing: 0.03em;
+        }
+        .contact-dot {
+          color: #2a2a2a;
+        }
+
+        /* Tablet */
+        @media (max-width: 768px) {
+          .cbtn-email-text {
+            /* Shorten displayed text on tablet if needed */
+            max-width: 220px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+        }
+
+        /* Mobile */
         @media (max-width: 600px) {
-          .cbtn { width: 100%; justify-content: center; }
+          .cbtn {
+            width: 100%;
+            justify-content: center;
+            padding: 14px 20px;
+          }
+          .cbtn-email-text {
+            max-width: 100%;
+            overflow: visible;
+            text-overflow: unset;
+            white-space: normal;
+            word-break: break-all;
+          }
+          .contact-dot {
+            display: none;
+          }
+          .contact-footer {
+            flex-direction: column;
+            gap: 4px;
+          }
         }
       `}</style>
     </section>

@@ -13,7 +13,8 @@ export default function About() {
   return (
     <section id="about" style={{
       padding: '7rem 2.5rem',
-      maxWidth: 1100, margin: '0 auto'
+      maxWidth: 1100,
+      margin: '0 auto'
     }}>
 
       {/* Section Label */}
@@ -24,7 +25,7 @@ export default function About() {
         <div style={{
           width: 40, height: 2,
           background: 'linear-gradient(90deg, #3b82f6, #00f5a0)'
-        }}/>
+        }} />
         <span style={{
           fontSize: '0.75rem', fontWeight: 600,
           color: '#3b82f6', letterSpacing: '0.15em',
@@ -46,9 +47,9 @@ export default function About() {
         <div>
           {/* Big Quote */}
           <p style={{
-            fontSize: '1.2rem', fontWeight: 700,
-            color: '#ffffff', lineHeight: 1.6,
-            marginBottom: '2rem',
+            fontSize: 'clamp(1rem, 2.5vw, 1.2rem)',
+            fontWeight: 700, color: '#ffffff',
+            lineHeight: 1.6, marginBottom: '2rem',
             borderLeft: '3px solid #3b82f6',
             paddingLeft: '1.25rem'
           }}>
@@ -61,17 +62,16 @@ export default function About() {
             lineHeight: 1.8, marginBottom: '1.25rem'
           }}>
             I am a <strong style={{ color: '#ffffff' }}>Software Engineer</strong> focused
-            on building reliable and scalable web applications that solve
-            real-world problems.
+            on building reliable and scalable web applications that solve real-world problems.
           </p>
 
           <p style={{
             fontSize: '0.95rem', color: '#888888',
             lineHeight: 1.8, marginBottom: '1.25rem'
           }}>
-            I work with modern web technologies to create efficient,
-            user-friendly, and <strong style={{ color: '#ffffff' }}>performance-driven
-            digital solutions</strong> that deliver real value.
+            I work with modern web technologies to create efficient, user-friendly, and{' '}
+            <strong style={{ color: '#ffffff' }}>performance-driven digital solutions</strong> that
+            deliver real value.
           </p>
 
           <p style={{
@@ -79,16 +79,12 @@ export default function About() {
             lineHeight: 1.8, marginBottom: '2.5rem'
           }}>
             I am constantly growing my skills in{' '}
-            <strong style={{ color: '#ffffff' }}>full-stack development</strong> and
-            software engineering best practices, with a strong focus on
-            writing clean and maintainable code.
+            <strong style={{ color: '#ffffff' }}>full-stack development</strong> and software
+            engineering best practices, with a strong focus on writing clean and maintainable code.
           </p>
 
           {/* Stats Row */}
-          <div style={{
-            display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '1rem', marginBottom: '2.5rem'
-          }}>
+          <div className="about-stats">
             {[
               { num: '2+', label: 'Live Projects' },
               { num: '10+', label: 'Technologies' },
@@ -101,9 +97,9 @@ export default function About() {
                 textAlign: 'center'
               }}>
                 <div style={{
-                  fontSize: '1.75rem', fontWeight: 800,
-                  color: '#00f5a0', letterSpacing: '-0.02em',
-                  marginBottom: '0.25rem'
+                  fontSize: 'clamp(1.4rem, 3vw, 1.75rem)',
+                  fontWeight: 800, color: '#00f5a0',
+                  letterSpacing: '-0.02em', marginBottom: '0.25rem'
                 }}>{s.num}</div>
                 <div style={{
                   fontSize: '0.75rem', color: '#888888', fontWeight: 500
@@ -118,6 +114,7 @@ export default function About() {
               e.preventDefault()
               document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
             }}
+            className="about-cta"
             style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
               background: '#3b82f6', color: '#fff',
@@ -153,8 +150,12 @@ export default function About() {
                 background: '#111111',
                 border: '1px solid #2a2a2a',
                 borderRadius: 10, padding: '1rem 1.25rem',
-                display: 'flex', alignItems: 'center', gap: '1rem'
-              }}>
+                display: 'flex', alignItems: 'center', gap: '1rem',
+                transition: 'border-color 0.2s'
+              }}
+                onMouseEnter={e => e.currentTarget.style.borderColor = '#3b82f6'}
+                onMouseLeave={e => e.currentTarget.style.borderColor = '#2a2a2a'}
+              >
                 {/* Icon */}
                 <div style={{
                   width: 36, height: 36, flexShrink: 0,
@@ -166,7 +167,7 @@ export default function About() {
                 }}>{s.icon}</div>
 
                 {/* Content */}
-                <div style={{ flex: 1 }}>
+                <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{
                     fontSize: '0.75rem', color: '#888888',
                     fontWeight: 600, marginBottom: '0.4rem',
@@ -198,10 +199,50 @@ export default function About() {
           align-items: start;
         }
 
+        .about-stats {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1rem;
+          margin-bottom: 2.5rem;
+        }
+
+        .about-cta {
+          width: fit-content;
+        }
+
+        /* Tablet */
+        @media (max-width: 900px) {
+          .about-grid {
+            gap: 2.5rem;
+          }
+        }
+
+        /* Mobile */
         @media (max-width: 768px) {
           .about-grid {
             grid-template-columns: 1fr;
             gap: 3rem;
+          }
+
+          section#about {
+            padding: 5rem 1.5rem;
+          }
+        }
+
+        /* Small mobile */
+        @media (max-width: 480px) {
+          section#about {
+            padding: 4rem 1.25rem;
+          }
+
+          .about-stats {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.65rem;
+          }
+
+          .about-cta {
+            width: 100%;
+            justify-content: center;
           }
         }
       `}</style>

@@ -55,7 +55,8 @@ export default function Projects() {
   return (
     <section id="work" style={{
       padding: '7rem 2.5rem',
-      maxWidth: 1100, margin: '0 auto'
+      maxWidth: 1100,
+      margin: '0 auto'
     }}>
 
       {/* Section Header */}
@@ -67,7 +68,7 @@ export default function Projects() {
           <div style={{
             width: 40, height: 2,
             background: 'linear-gradient(90deg, #3b82f6, #00f5a0)'
-          }}/>
+          }} />
           <span style={{
             fontSize: '0.75rem', fontWeight: 600,
             color: '#3b82f6', letterSpacing: '0.15em',
@@ -113,7 +114,8 @@ export default function Projects() {
               {/* Top Row — Client + Badge */}
               <div style={{
                 display: 'flex', justifyContent: 'space-between',
-                alignItems: 'center', marginBottom: '1rem'
+                alignItems: 'center', marginBottom: '1rem',
+                flexWrap: 'wrap', gap: '0.5rem'
               }}>
                 <span style={{
                   fontSize: '0.78rem', color: '#888888', fontWeight: 500
@@ -123,15 +125,16 @@ export default function Projects() {
                   border: `1px solid ${p.badgeColor}40`,
                   color: p.badgeColor, fontSize: '0.65rem',
                   fontWeight: 700, padding: '0.2rem 0.65rem',
-                  borderRadius: 100, letterSpacing: '0.08em'
+                  borderRadius: 100, letterSpacing: '0.08em',
+                  whiteSpace: 'nowrap'
                 }}>{p.badge}</span>
               </div>
 
               {/* Title */}
               <h3 style={{
-                fontSize: '1.2rem', fontWeight: 800,
-                color: '#ffffff', marginBottom: '0.75rem',
-                letterSpacing: '-0.01em'
+                fontSize: 'clamp(1rem, 2.5vw, 1.2rem)',
+                fontWeight: 800, color: '#ffffff',
+                marginBottom: '0.75rem', letterSpacing: '-0.01em'
               }}>{p.title}</h3>
 
               {/* Description */}
@@ -142,8 +145,8 @@ export default function Projects() {
 
               {/* Metrics */}
               <div style={{
-                display: 'grid', gridTemplateColumns: 'repeat(3,1fr)',
-                gap: '0.75rem', marginBottom: '1.5rem'
+                display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)',
+                gap: '0.65rem', marginBottom: '1.5rem'
               }}>
                 {p.metrics.map(m => (
                   <div key={m.label} style={{
@@ -153,12 +156,12 @@ export default function Projects() {
                     textAlign: 'center'
                   }}>
                     <div style={{
-                      fontSize: '0.65rem', color: '#888888',
+                      fontSize: '0.62rem', color: '#888888',
                       marginBottom: '0.2rem', textTransform: 'uppercase',
                       letterSpacing: '0.05em'
                     }}>{m.label}</div>
                     <div style={{
-                      fontSize: '0.85rem', fontWeight: 700,
+                      fontSize: '0.82rem', fontWeight: 700,
                       color: '#60a5fa'
                     }}>{m.value}</div>
                   </div>
@@ -182,7 +185,7 @@ export default function Projects() {
               </div>
 
               {/* Links */}
-              <div style={{ display: 'flex', gap: '0.75rem' }}>
+              <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
                 {p.comingSoon ? (
                   <span style={{
                     fontSize: '0.82rem', color: '#888888',
@@ -192,47 +195,74 @@ export default function Projects() {
                   }}>🚧 In Progress...</span>
                 ) : (
                   <>
-                    <a href={p.demo} target="_blank" rel="noreferrer" style={{
-                      background: '#3b82f6', color: '#fff',
-                      fontSize: '0.82rem', fontWeight: 600,
-                      padding: '0.55rem 1.25rem', borderRadius: 8,
-                      textDecoration: 'none', display: 'inline-flex',
-                      alignItems: 'center', gap: '0.4rem',
-                      transition: 'opacity 0.2s'
-                    }}
+                    <a href={p.demo} target="_blank" rel="noreferrer"
+                      className="project-btn-demo"
+                      style={{
+                        background: '#3b82f6', color: '#fff',
+                        fontSize: '0.82rem', fontWeight: 600,
+                        padding: '0.55rem 1.25rem', borderRadius: 8,
+                        textDecoration: 'none', display: 'inline-flex',
+                        alignItems: 'center', gap: '0.4rem',
+                        transition: 'opacity 0.2s', flex: 1,
+                        justifyContent: 'center'
+                      }}
                       onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
                       onMouseLeave={e => e.currentTarget.style.opacity = '1'}
                     >🔗 Live Demo</a>
-                    <a href={p.github} target="_blank" rel="noreferrer" style={{
-                      background: '#1a1a1a', color: '#ffffff',
-                      fontSize: '0.82rem', fontWeight: 600,
-                      padding: '0.55rem 1.25rem', borderRadius: 8,
-                      textDecoration: 'none', border: '1px solid #2a2a2a',
-                      display: 'inline-flex', alignItems: 'center',
-                      gap: '0.4rem', transition: 'border-color 0.2s'
-                    }}
+                    <a href={p.github} target="_blank" rel="noreferrer"
+                      className="project-btn-github"
+                      style={{
+                        background: '#1a1a1a', color: '#ffffff',
+                        fontSize: '0.82rem', fontWeight: 600,
+                        padding: '0.55rem 1.25rem', borderRadius: 8,
+                        textDecoration: 'none', border: '1px solid #2a2a2a',
+                        display: 'inline-flex', alignItems: 'center',
+                        gap: '0.4rem', transition: 'border-color 0.2s',
+                        flex: 1, justifyContent: 'center'
+                      }}
                       onMouseEnter={e => e.currentTarget.style.borderColor = '#888888'}
                       onMouseLeave={e => e.currentTarget.style.borderColor = '#2a2a2a'}
                     >GitHub</a>
                   </>
                 )}
               </div>
+
             </div>
           </div>
         ))}
       </div>
 
       <style>{`
+        /* Desktop */
         .projects-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 1.5rem;
         }
+
+        /* Tablet */
         @media (max-width: 900px) {
-          .projects-grid { grid-template-columns: repeat(2, 1fr); }
+          .projects-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
         }
+
+        /* Mobile */
         @media (max-width: 600px) {
-          .projects-grid { grid-template-columns: 1fr; }
+          .projects-grid {
+            grid-template-columns: 1fr;
+          }
+
+          section#work {
+            padding: 5rem 1.5rem;
+          }
+        }
+
+        /* Small mobile */
+        @media (max-width: 480px) {
+          section#work {
+            padding: 4rem 1.25rem;
+          }
         }
       `}</style>
     </section>

@@ -42,34 +42,44 @@ const skills = [
 export default function Skills() {
   return (
     <section id="services" style={{
-      padding: '7rem 2.5rem',
-      maxWidth: 1100, margin: '0 auto'
+      padding: 'clamp(3.5rem, 8vw, 7rem) clamp(1rem, 5vw, 2.5rem)',
+      maxWidth: 1100,
+      margin: '0 auto',
     }}>
 
       {/* Section Header */}
-      <div style={{ marginBottom: '4rem' }}>
+      <div style={{ marginBottom: 'clamp(2rem, 5vw, 4rem)' }}>
         <div style={{
           display: 'flex', alignItems: 'center', gap: '0.75rem',
           marginBottom: '1rem'
         }}>
           <div style={{
             width: 40, height: 2,
-            background: 'linear-gradient(90deg, #3b82f6, #00f5a0)'
+            background: 'linear-gradient(90deg, #3b82f6, #00f5a0)',
+            flexShrink: 0,
           }}/>
           <span style={{
-            fontSize: '0.75rem', fontWeight: 600,
-            color: '#3b82f6', letterSpacing: '0.15em',
-            textTransform: 'uppercase'
+            fontSize: 'clamp(0.65rem, 2vw, 0.75rem)',
+            fontWeight: 600,
+            color: '#3b82f6',
+            letterSpacing: '0.15em',
+            textTransform: 'uppercase',
           }}>WHAT I KNOW</span>
         </div>
+
         <h2 style={{
-          fontSize: 'clamp(2rem, 5vw, 3rem)',
-          fontWeight: 800, color: '#ffffff',
-          letterSpacing: '-0.02em', marginBottom: '1rem'
+          fontSize: 'clamp(1.75rem, 5vw, 3rem)',
+          fontWeight: 800,
+          color: '#ffffff',
+          letterSpacing: '-0.02em',
+          marginBottom: '1rem',
         }}>Skills Built on Practice</h2>
+
         <p style={{
-          fontSize: '1rem', color: '#888888',
-          maxWidth: 550, lineHeight: 1.7
+          fontSize: 'clamp(0.875rem, 2.5vw, 1rem)',
+          color: '#888888',
+          maxWidth: 550,
+          lineHeight: 1.7,
         }}>
           Not just theory. Every skill here has been applied in real projects
           with real users and real deadlines.
@@ -79,13 +89,9 @@ export default function Skills() {
       {/* Skills Grid */}
       <div className="skills-grid">
         {skills.map(s => (
-          <div key={s.title} className="skill-card" style={{
-            background: '#111111',
-            border: '1px solid #2a2a2a',
-            borderRadius: 12, padding: '1.75rem',
-            transition: 'all 0.25s',
-            cursor: 'default'
-          }}
+          <div
+            key={s.title}
+            className="skill-card"
             onMouseEnter={e => {
               e.currentTarget.style.borderColor = '#3b82f6'
               e.currentTarget.style.transform = 'translateY(-4px)'
@@ -102,21 +108,29 @@ export default function Skills() {
               width: 48, height: 48,
               background: 'rgba(59,130,246,0.1)',
               border: '1px solid rgba(59,130,246,0.2)',
-              borderRadius: 10, display: 'flex',
-              alignItems: 'center', justifyContent: 'center',
-              fontSize: '1.4rem', marginBottom: '1.25rem'
+              borderRadius: 10,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '1.4rem',
+              marginBottom: '1.25rem',
+              flexShrink: 0,
             }}>{s.icon}</div>
 
             {/* Title */}
             <h3 style={{
-              fontSize: '1rem', fontWeight: 700,
-              color: '#ffffff', marginBottom: '0.5rem'
+              fontSize: 'clamp(0.9rem, 2.5vw, 1rem)',
+              fontWeight: 700,
+              color: '#ffffff',
+              marginBottom: '0.5rem',
             }}>{s.title}</h3>
 
             {/* Description */}
             <p style={{
-              fontSize: '0.82rem', color: '#888888',
-              lineHeight: 1.6, marginBottom: '1.25rem'
+              fontSize: 'clamp(0.78rem, 2vw, 0.82rem)',
+              color: '#888888',
+              lineHeight: 1.6,
+              marginBottom: '1.25rem',
             }}>{s.desc}</p>
 
             {/* Tags */}
@@ -125,9 +139,11 @@ export default function Skills() {
                 <span key={tag} style={{
                   background: 'rgba(0,245,160,0.06)',
                   border: '1px solid rgba(0,245,160,0.15)',
-                  color: '#00f5a0', fontSize: '0.72rem',
-                  fontWeight: 500, padding: '0.25rem 0.65rem',
-                  borderRadius: 100
+                  color: '#00f5a0',
+                  fontSize: 'clamp(0.65rem, 2vw, 0.72rem)',
+                  fontWeight: 500,
+                  padding: '0.25rem 0.65rem',
+                  borderRadius: 100,
                 }}>{tag}</span>
               ))}
             </div>
@@ -136,16 +152,31 @@ export default function Skills() {
       </div>
 
       <style>{`
+        .skill-card {
+          background: #111111;
+          border: 1px solid #2a2a2a;
+          border-radius: 12px;
+          padding: clamp(1.1rem, 3vw, 1.75rem);
+          transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+          cursor: default;
+        }
+
         .skills-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 1.25rem;
+          gap: clamp(0.75rem, 2vw, 1.25rem);
         }
+
         @media (max-width: 900px) {
           .skills-grid { grid-template-columns: repeat(2, 1fr); }
         }
+
         @media (max-width: 550px) {
           .skills-grid { grid-template-columns: 1fr; }
+          /* Disable hover lift on touch devices */
+          .skill-card:hover {
+            transform: none !important;
+          }
         }
       `}</style>
     </section>
